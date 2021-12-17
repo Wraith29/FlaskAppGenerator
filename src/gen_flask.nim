@@ -9,7 +9,7 @@ when isMainModule:
         apiInp:          string
         filePath:        string
         templ:           string
-        defaultFilePath: string = "C:/Users/iacna/..Programming/flask-gen-nim"
+        defaultFilePath: string = os.getAppDir()
 
 
     echo "File Path: "
@@ -28,27 +28,28 @@ when isMainModule:
             isApi = false
         else:
             echo "Invalid. Please Restart"
+            quit(1)
     
-    templ = readFile(&"{defaultFilePath}/templates/main.{apiInp.toLower()}.py")
-    createDir(&"{filePath}/{apiInp.toLower()}")
-    createDir(&"{filePath}/{apiInp.toLower()}/routes")
-    writeFile(&"{filePath}/{apiInp.toLower()}/routes/__init__.py", "")
+    templ = readFile(fmt"{defaultFilePath}\..\templates\main.{apiInp.toLower()}.py")
+    createDir(fmt"{filePath}\{apiInp.toLower()}")
+    createDir(fmt"{filePath}\{apiInp.toLower()}\routes")
+    writeFile(fmt"{filePath}\{apiInp.toLower()}\routes\__init__.py", "")
 
-    writeFile(&"{filePath}/main.py", templ)    
+    writeFile(fmt"{filePath}\main.py", templ)    
     writeFile(
-        &"{filePath}/{apiInp.toLower()}/__init__.py", 
-        readFile(&"{defaultFilePath}/templates/{apiInp.toLower()}/__init__.py")
+        fmt"{filePath}\{apiInp.toLower()}\__init__.py", 
+        readFile(fmt"{defaultFilePath}\..\templates\{apiInp.toLower()}\__init__.py")
     )
     
 
     if not isApi:
-        createDir(&"{filePath}/app/static")
+        createDir(fmt"{filePath}\app\static")
         writeFile(
-            &"{filePath}/app/static/styles.css", ""
+            fmt"{filePath}\app\static\styles.css", ""
         )
-        createDir(&"{filePath}/app/templates")
+        createDir(fmt"{filePath}\app\templates")
         writeFile(
-            &"{filePath}/app/templates/base.html",
-            readFile(&"{defaultFilePath}/templates/app/templates/base.html")
+            fmt"{filePath}\app\templates\base.html",
+            readFile(fmt"{defaultFilePath}\..\templates\app\templates\base.html")
         )
     
