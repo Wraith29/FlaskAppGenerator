@@ -11,7 +11,7 @@
 ```.
 > gen_flask
 > File Path:
-> C:/Users/iacna/FlaskApp
+> C:/Users/username/FlaskApp
 > Api / App
 > App
 ```
