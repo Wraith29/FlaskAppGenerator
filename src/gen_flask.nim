@@ -1,7 +1,7 @@
 import 
     strformat,
     strutils,
-    std/os
+    os
 
 when isMainModule:
     var
